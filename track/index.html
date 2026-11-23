@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Your Order | Suya Exclusive</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1d1410">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <style>
+    .track { min-height: 100vh; display: grid; place-items: start center; padding: 2.5rem 0 7rem; }
+    .card { background: #fff; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 40px rgba(122,52,24,.12); width: min(560px, 100% - 32px); }
+    .card h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); }
+    .tn { font-family: ui-monospace, Menlo, monospace; background: var(--sand); padding: .6em .9em; border-radius: 10px; word-break: break-all; font-size: 1.05rem; margin: .4rem 0 1.4rem; }
+    .carrier { color: var(--ink-2); font-size: .95rem; margin-bottom: .4rem; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .btn-row .btn { flex: 1 1 auto; }
+    .tips { margin-top: 1.8rem; border-top: 1px dashed #d8c7b1; padding-top: 1.4rem; }
+    .tips h2 { font-size: 1.2rem; }
+    .tips ol { padding-left: 1.2rem; color: var(--ink-2); margin: 0; }
+    .tips li { margin-bottom: .4rem; }
+    form { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+    input { flex: 1 1 220px; font: inherit; padding: .85em 1em; border-radius: 999px; border: 2px solid #d8c7b1; }
+    input:focus { outline: none; border-color: var(--ember); }
+    .help { font-size: .9rem; color: var(--ink-2); margin-top: 1.4rem; }
+    .help a { color: var(--ember); font-weight: 600; }
+    .back { display: inline-block; margin-bottom: 1.2rem; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main class="track">
+    <div class="card">
+      <a href="/" class="logo back">Suya <em>Exclusive</em></a>
+
+      <!-- Shown when a tracking number is in the link -->
+      <section id="found" hidden>
+        <p class="eyebrow">Order update</p>
+        <h1>Your suya is on the way! 🔥</h1>
+        <p class="carrier" id="carrier"></p>
+        <div class="tn" id="tn"></div>
+        <div class="btn-row" id="buttons"></div>
+      </section>
+
+      <!-- Shown when someone opens /track with no number -->
+      <section id="empty" hidden>
+        <p class="eyebrow">Track your order</p>
+        <h1>Where's my suya?</h1>
+        <p class="muted">Enter the tracking number we sent you by text or WhatsApp.</p>
+        <form id="form">
+          <input id="input" name="n" placeholder="Tracking number" autocomplete="off" required>
+          <button class="btn" type="submit">Track</button>
+        </form>
+      </section>
+
+      <div class="tips">
+        <h2>When your package arrives</h2>
+        <ol>
+          <li>Your suya ships frozen. Put it in the <strong>freezer</strong> right away, or the fridge if you're eating it within a day or two.</li>
+          <li>Thaw in the fridge overnight.</li>
+          <li>Warm in the oven at 350°F for 8–10 minutes, or an air fryer for 4–5 minutes.</li>
+        </ol>
+        <p class="help">Questions about your order? Call or text <a href="tel:+12404812399">(240) 481-2399</a> or <a href="https://wa.me/12404812399" target="_blank" rel="noopener">WhatsApp us</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const CARRIERS = {
+      ups:   { name: "UPS",   url: n => "https://www.ups.com/track?tracknum=" + n },
+      usps:  { name: "USPS",  url: n => "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + n },
+      fedex: { name: "FedEx", url: n => "https://www.fedex.com/fedextrack/?trknbr=" + n },
+    };
+
+    function detect(n) {
+      if (/^1Z[0-9A-Z]{16}$/.test(n)) return "ups";
+      if (/^9[1-5]\d{18,24}$/.test(n) || /^[A-Z]{2}\d{9}US$/.test(n)) return "usps";
+      if (/^(\d{12}|\d{15})$/.test(n)) return "fedex";
+      return null;
+    }
+
+    const params = new URLSearchParams(location.search);
+    const n = (params.get("n") || "").replace(/[\s-]/g, "").toUpperCase();
+    const forced = (params.get("c") || "").toLowerCase();
+
+    if (!n) {
+      document.getElementById("empty").hidden = false;
+      document.getElementById("form").addEventListener("submit", e => {
+        e.preventDefault();
+        const v = document.getElementById("input").value.replace(/[\s-]/g, "");
+        if (v) location.search = "?n=" + encodeURIComponent(v);
+      });
+    } else {
+      document.getElementById("found").hidden = false;
+      document.getElementById("tn").textContent = n;
+      const c = CARRIERS[forced] ? forced : detect(n);
+      const box = document.getElementById("buttons");
+      const make = (key, primary) => {
+        const a = document.createElement("a");
+        a.className = primary ? "btn" : "btn btn-ghost";
+        a.href = CARRIERS[key].url(encodeURIComponent(n));
+        a.target = "_blank"; a.rel = "noopener";
+        a.textContent = primary ? "📦 Track with " + CARRIERS[key].name : CARRIERS[key].name;
+        box.appendChild(a);
+      };
+      if (c) {
+        document.getElementById("carrier").textContent = "Shipped with " + CARRIERS[c].name + " · Tracking number:";
+        make(c, true);
+      } else {
+        document.getElementById("carrier").textContent = "Tracking number — choose your carrier:";
+        Object.keys(CARRIERS).forEach(k => make(k, false));
+      }
+    }
+  </script>
+</body>
+</html>
