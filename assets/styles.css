@@ -130,6 +130,11 @@ p { margin: 0 0 1em; }
 .week li.on { background: var(--ember); color: #fff; }
 .week li.today { outline: 3px solid var(--gold); outline-offset: 3px; }
 
+.hours { max-width: 380px; margin: 1.6rem auto .4rem; text-align: left; }
+.hours div { display: flex; justify-content: space-between; padding: .55em 0; border-bottom: 1px solid #3a2d26; }
+.hours dt { font-weight: 600; }
+.hours dd { margin: 0; color: #e2b44a; font-weight: 600; }
+
 /* FAQ */
 details { background: #fff; border-radius: 12px; padding: 1.1rem 1.3rem; margin-bottom: .8rem; }
 summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }

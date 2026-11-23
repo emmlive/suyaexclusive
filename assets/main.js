@@ -4,6 +4,7 @@ const SITE = {
   phoneDial: "+12404812399",   // used for tap-to-call / text (E.164 format)
   timeZone: "America/Chicago", // order days are based on this time zone
   orderDays: [6, 0, 1, 2],     // 0=Sun ... 6=Sat  → Sat, Sun, Mon, Tue
+  closeLabel: ["6 PM", "5 PM", "5 PM", "5 PM", "5 PM", "5 PM", "5 PM"], // phone closes, Sun..Sat
 };
 // ======================
 
@@ -20,7 +21,7 @@ const open = SITE.orderDays.includes(today);
 const status = document.querySelector(".js-status");
 if (status) {
   status.textContent = open
-    ? "● Taking orders today — call now"
+    ? "● Taking orders today until " + SITE.closeLabel[today] + " — call now"
     : "● Orders reopen Saturday — text us anytime";
   status.classList.add(open ? "is-open" : "is-closed");
 }

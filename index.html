@@ -29,9 +29,12 @@
       "@id": "https://www.suyaexclusive.com/#business",
       "name": "Suya Exclusive",
       "url": "https://www.suyaexclusive.com/",
-      "description": "Authentic Hausa-style Nigerian beef suya, smoke-grilled with house-made yaji spice, frozen overnight and shipped. Order by phone for individual orders or catering. Orders taken Saturday through Tuesday.",
+      "description": "Authentic Hausa-style Nigerian beef suya, smoke-grilled with house-made yaji spice, frozen overnight and shipped. Order by phone for individual orders or catering. Orders taken Saturday through Tuesday (no shipping after Tuesday so food never sits in transit over the weekend). Phone hours: Sun 2–6 PM, Mon–Fri 10 AM–5 PM, Sat 12–5 PM Central.",
       "telephone": "+1-240-481-2399",
-      "image": ["https://www.suyaexclusive.com/assets/img/beef-suya.jpg", "https://www.suyaexclusive.com/assets/og-image.png"],
+      "image": [
+        "https://www.suyaexclusive.com/assets/img/beef-suya.jpg",
+        "https://www.suyaexclusive.com/assets/og-image.png"
+      ],
       "servesCuisine": [
         "Nigerian",
         "African",
@@ -70,7 +73,33 @@
         "telephone": "+1-240-481-2399",
         "contactType": "orders",
         "availableLanguage": "English"
-      }
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "14:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "10:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "12:00",
+          "closes": "17:00"
+        }
+      ]
     },
     {
       "@type": "Product",
@@ -80,7 +109,10 @@
         "name": "Suya Exclusive"
       },
       "description": "Authentic Nigerian beef suya, smoke-grilled with yaji spice (contains peanuts), frozen overnight and shipped from Texas.",
-      "image": ["https://www.suyaexclusive.com/assets/img/beef-suya.jpg", "https://www.suyaexclusive.com/assets/og-image.png"],
+      "image": [
+        "https://www.suyaexclusive.com/assets/img/beef-suya.jpg",
+        "https://www.suyaexclusive.com/assets/og-image.png"
+      ],
       "offers": {
         "@type": "Offer",
         "price": "160.00",
@@ -340,7 +372,13 @@
           <li data-day="4">Thu</li>
           <li data-day="5">Fri</li>
         </ul>
-        <p class="muted-light">Wednesday – Friday we're busy grilling and shipping. You can still text us and we'll get back to you on Saturday.</p>
+        <p class="muted-light">We don't ship after Tuesday so your suya never sits in transit over the weekend. Wednesday – Friday you can still call or text with questions or to plan an order.</p>
+        <dl class="hours">
+          <div><dt>Sunday</dt><dd>2 – 6 PM</dd></div>
+          <div><dt>Monday – Friday</dt><dd>10 AM – 5 PM</dd></div>
+          <div><dt>Saturday</dt><dd>12 – 5 PM</dd></div>
+        </dl>
+        <p class="muted-light">Phone hours, Central Time</p>
       </div>
     </section>
 
@@ -393,7 +431,7 @@
     <div class="wrap footer-inner">
       <div>
         <p class="logo">Suya <em>Exclusive</em></p>
-        <p class="muted-light">Orders: Saturday – Tuesday<br>Office: Plainfield, IL · Ships from Texas</p>
+        <p class="muted-light">Orders: Saturday – Tuesday<br>Office: Plainfield, IL · Ships from Texas<br>Phone: Sun 2–6 · Mon–Fri 10–5 · Sat 12–5 (CT)</p>
       </div>
       <div class="footer-contact">
         <a class="js-call" href="tel:+12404812399">📞 <span class="js-phone">(240) 481-2399</span></a>
