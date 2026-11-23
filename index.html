@@ -31,7 +31,7 @@
       "url": "https://www.suyaexclusive.com/",
       "description": "Authentic Hausa-style Nigerian beef suya, smoke-grilled with house-made yaji spice, frozen overnight and shipped. Order by phone for individual orders or catering. Orders taken Saturday through Tuesday.",
       "telephone": "+1-240-481-2399",
-      "image": "https://www.suyaexclusive.com/assets/og-image.png",
+      "image": ["https://www.suyaexclusive.com/assets/img/beef-suya.jpg", "https://www.suyaexclusive.com/assets/og-image.png"],
       "servesCuisine": [
         "Nigerian",
         "African",
@@ -80,7 +80,7 @@
         "name": "Suya Exclusive"
       },
       "description": "Authentic Nigerian beef suya, smoke-grilled with yaji spice (contains peanuts), frozen overnight and shipped from Texas.",
-      "image": "https://www.suyaexclusive.com/assets/og-image.png",
+      "image": ["https://www.suyaexclusive.com/assets/img/beef-suya.jpg", "https://www.suyaexclusive.com/assets/og-image.png"],
       "offers": {
         "@type": "Offer",
         "price": "160.00",
@@ -215,27 +215,13 @@
           </div>
           <p class="days-note"><strong>Orders taken Saturday – Tuesday</strong> · Ships frozen from Texas</p>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 320 320" class="skewers">
-            <defs>
-              <radialGradient id="glow" cx="50%" cy="55%" r="50%">
-                <stop offset="0%" stop-color="#ff8a3d" stop-opacity=".55"/>
-                <stop offset="100%" stop-color="#ff8a3d" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <circle cx="160" cy="170" r="150" fill="url(#glow)"/>
-            <g transform="rotate(-28 160 160)">
-              <rect x="20" y="118" width="280" height="5" rx="2.5" fill="#d9b27c"/>
-              <g fill="#7a3418"><rect x="58" y="100" width="44" height="40" rx="12"/><rect x="110" y="98" width="46" height="44" rx="12"/><rect x="164" y="101" width="42" height="38" rx="12"/><rect x="214" y="99" width="44" height="42" rx="12"/></g>
-              <g fill="#c2501f" opacity=".85"><circle cx="72" cy="112" r="3"/><circle cx="90" cy="126" r="2.5"/><circle cx="128" cy="110" r="3"/><circle cx="142" cy="130" r="2.5"/><circle cx="180" cy="114" r="3"/><circle cx="196" cy="128" r="2.5"/><circle cx="230" cy="112" r="3"/><circle cx="246" cy="130" r="2.5"/></g>
-              <rect x="20" y="188" width="280" height="5" rx="2.5" fill="#d9b27c"/>
-              <g fill="#8c3c1b"><rect x="48" y="170" width="46" height="40" rx="12"/><rect x="102" y="168" width="44" height="44" rx="12"/><rect x="154" y="171" width="46" height="38" rx="12"/><rect x="208" y="169" width="44" height="42" rx="12"/></g>
-              <g fill="#e2b44a" opacity=".8"><circle cx="64" cy="182" r="2.5"/><circle cx="118" cy="196" r="3"/><circle cx="172" cy="182" r="2.5"/><circle cx="228" cy="196" r="3"/></g>
-            </g>
-            <g fill="#3f8f3a"><ellipse cx="80" cy="262" rx="26" ry="8"/><ellipse cx="240" cy="258" rx="22" ry="7"/></g>
-            <g fill="none" stroke="#f2ede4" stroke-width="5" opacity=".9"><ellipse cx="130" cy="268" rx="18" ry="9"/><ellipse cx="200" cy="270" rx="16" ry="8"/></g>
-          </svg>
-        </div>
+        <figure class="hero-photo">
+          <picture>
+            <source srcset="/assets/img/beef-suya.webp" type="image/webp">
+            <img src="/assets/img/beef-suya.jpg" width="507" height="446" alt="Plate of Suya Exclusive beef suya coated in yaji spice, served with sliced onions and tomatoes" fetchpriority="high">
+          </picture>
+          <figcaption>Our beef suya, served the traditional way</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -251,8 +237,11 @@
           <p>We make our beef suya the traditional way, with our own yaji, so you can have that taste at home or bring it to your next event, wherever you are.</p>
         </div>
         <figure class="story-photo">
-          <!-- PHOTO: replace this illustration with <img src="/assets/img/story.jpg" alt="..."> -->
-          <div class="photo-placeholder" aria-hidden="true"><span>🔥</span></div>
+          <blockquote class="pull">
+            <span class="pull-mark" aria-hidden="true">“</span>
+            <p>Yaji is what makes it suya.</p>
+            <cite>Roasted peanuts · ginger · chili · spice</cite>
+          </blockquote>
         </figure>
       </div>
       <div class="wrap">
