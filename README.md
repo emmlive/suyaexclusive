@@ -18,3 +18,7 @@ No build step: plain HTML/CSS/JS, hosted on Cloudflare Pages.
 2. Namecheap → Domain List → Manage → Nameservers → Custom DNS → paste Cloudflare's two nameservers.
 3. Pages project → Custom domains → add `www.suyaexclusive.com` and `suyaexclusive.com`.
 4. Optional: Rules → Redirect Rules → redirect `suyaexclusive.com/*` → `https://www.suyaexclusive.com/${1}` (301).
+
+## Shipping notifications
+- **/ship** — owner helper (not linked, noindex). Enter customer name, phone, tracking number → sends the "your order shipped" message via WhatsApp or SMS. Add it to your phone's home screen.
+- **/track?n=TRACKING&c=ups|usps|fedex** — customer-facing tracking page. Auto-detects the carrier if `c` is omitted. Nothing is stored.
