@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ship Order | Suya Exclusive</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1d1410">
+  <meta name="apple-mobile-web-app-title" content="Ship Suya">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <style>
+    body { background: var(--sand); }
+    .app { width: min(520px, 100% - 28px); margin: 1.5rem auto 3rem; }
+    .card { background: #fff; border-radius: 20px; padding: 1.6rem; box-shadow: 0 10px 40px rgba(122,52,24,.1); }
+    h1 { font-size: 1.8rem; margin-bottom: .2rem; }
+    label { display: block; font-weight: 600; margin: 1rem 0 .35rem; }
+    label span { font-weight: 400; color: var(--ink-2); font-size: .9rem; }
+    input, select, textarea { width: 100%; font: inherit; padding: .8em 1em; border-radius: 12px; border: 2px solid #e3d5c3; background: #fff; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ember); }
+    textarea { min-height: 170px; resize: vertical; line-height: 1.5; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .actions { display: grid; gap: .6rem; margin-top: 1rem; }
+    .actions .btn { width: 100%; font-size: 1.05rem; }
+    .wa { background: #1f9e55; border-color: #1f9e55; }
+    .wa:hover { background: #17824a; border-color: #17824a; }
+    .note { font-size: .88rem; color: var(--ink-2); margin-top: 1rem; }
+    .ok { color: var(--green); font-weight: 600; min-height: 1.4em; margin-top: .4rem; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="card">
+      <p class="logo">Suya <em>Exclusive</em></p>
+      <h1>Ship an order</h1>
+      <p class="muted">Fill this in, then send the message to your customer.</p>
+
+      <label for="name">Customer first name</label>
+      <input id="name" autocomplete="off" placeholder="e.g. Tunde">
+
+      <label for="phone">Customer phone <span>(optional — opens their chat directly)</span></label>
+      <input id="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="e.g. (312) 555-0123">
+
+      <label for="tn">Tracking number</label>
+      <input id="tn" autocomplete="off" autocapitalize="characters" placeholder="Paste tracking number">
+
+      <label for="carrier">Carrier</label>
+      <select id="carrier">
+        <option value="">Auto-detect</option>
+        <option value="ups">UPS</option>
+        <option value="usps">USPS</option>
+        <option value="fedex">FedEx</option>
+      </select>
+
+      <label for="msg">Message <span>(you can edit it)</span></label>
+      <textarea id="msg"></textarea>
+
+      <div class="actions">
+        <a class="btn wa" id="sendWa" href="#" target="_blank" rel="noopener">🟢 Send on WhatsApp</a>
+        <a class="btn" id="sendSms" href="#">💬 Send as Text</a>
+        <button class="btn btn-ghost" id="copy" type="button">Copy message</button>
+      </div>
+      <p class="ok" id="ok" aria-live="polite"></p>
+
+      <p class="note">Tip: add this page to your phone's home screen (Share → Add to Home Screen) so it's always one tap away. Nothing you type here is saved or sent anywhere until you tap a button.</p>
+    </div>
+  </main>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    let edited = false;
+
+    function digits(p) {
+      let d = (p || "").replace(/\D/g, "");
+      if (d.length === 10) d = "1" + d;  // assume US
+      return d;
+    }
+
+    function trackUrl() {
+      const tn = $("tn").value.replace(/[\s-]/g, "").toUpperCase();
+      if (!tn) return "";
+      const c = $("carrier").value;
+      return "https://www.suyaexclusive.com/track?n=" + encodeURIComponent(tn) + (c ? "&c=" + c : "");
+    }
+
+    function build() {
+      const name = $("name").value.trim();
+      const url = trackUrl() || "https://www.suyaexclusive.com/track?n=TRACKING_NUMBER";
+      return (name ? "Hi " + name + ", y" : "Hi! Y") +
+        "our Suya Exclusive order has shipped! 🔥\n\n" +
+        "Track it here: " + url + "\n\n" +
+        "It's packed frozen, so please put it in the freezer as soon as it arrives. " +
+        "Thank you for ordering with us!";
+    }
+
+    function update() {
+      if (!edited) $("msg").value = build();
+      const text = $("msg").value;
+      const d = digits($("phone").value);
+      $("sendWa").href = "https://wa.me/" + (d || "") + "?text=" + encodeURIComponent(text);
+      $("sendSms").href = "sms:" + (d ? "+" + d : "") + "?&body=" + encodeURIComponent(text);
+    }
+
+    ["name", "phone", "tn", "carrier"].forEach(id => $(id).addEventListener("input", update));
+    $("msg").addEventListener("input", () => { edited = true; update(); });
+    $("copy").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText($("msg").value); $("ok").textContent = "Copied ✓"; }
+      catch { $("msg").select(); $("ok").textContent = "Press and hold to copy"; }
+    });
+    update();
+  </script>
+</body>
+</html>
