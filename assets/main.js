@@ -1,7 +1,7 @@
 // ===== EDIT THESE =====
 const SITE = {
-  phone: "(000) 000-0000",     // shown on the page
-  phoneDial: "+10000000000",   // used for tap-to-call / text (E.164 format)
+  phone: "(240) 481-2399",     // shown on the page
+  phoneDial: "+12404812399",   // used for tap-to-call / text (E.164 format)
   timeZone: "America/Chicago", // order days are based on this time zone
   orderDays: [6, 0, 1, 2],     // 0=Sun ... 6=Sat  → Sat, Sun, Mon, Tue
 };
