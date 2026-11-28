@@ -29,3 +29,32 @@ if (status) {
 document.querySelectorAll(".week li").forEach(li => {
   if (Number(li.dataset.day) === today) li.classList.add("today");
 });
+
+// Hero photo: embers + gentle tilt
+(() => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const box = document.querySelector(".embers");
+  if (box) {
+    for (let i = 0; i < 26; i++) {
+      const e = document.createElement("span");
+      e.className = "ember";
+      e.style.left = (8 + Math.random() * 84) + "%";
+      e.style.setProperty("--s", (5 + Math.random() * 7).toFixed(1) + "px");
+      e.style.setProperty("--d", (4 + Math.random() * 5).toFixed(1) + "s");
+      e.style.setProperty("--delay", (-Math.random() * 8).toFixed(1) + "s");
+      e.style.setProperty("--x", ((Math.random() - .5) * 120).toFixed(0) + "px");
+      box.appendChild(e);
+    }
+  }
+  const frame = document.querySelector(".photo-frame");
+  const stage = document.querySelector(".photo-stage");
+  if (frame && stage && matchMedia("(hover: hover)").matches) {
+    stage.addEventListener("mousemove", ev => {
+      const r = stage.getBoundingClientRect();
+      const x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+      frame.style.setProperty("--ry", (x * 10).toFixed(2) + "deg");
+      frame.style.setProperty("--rx", (-y * 10).toFixed(2) + "deg");
+    });
+    stage.addEventListener("mouseleave", () => { frame.style.setProperty("--rx", "0deg"); frame.style.setProperty("--ry", "0deg"); });
+  }
+})();
