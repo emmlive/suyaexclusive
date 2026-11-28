@@ -35,7 +35,7 @@ document.querySelectorAll(".week li").forEach(li => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const box = document.querySelector(".embers");
   if (box) {
-    for (let i = 0; i < 26; i++) {
+    for (let i = 0; i < 12; i++) {
       const e = document.createElement("span");
       e.className = "ember";
       e.style.left = (8 + Math.random() * 84) + "%";
