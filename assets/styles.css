@@ -103,7 +103,9 @@ p { margin: 0 0 1em; }
 .hero-photo figcaption { text-align: center; font-size: .85rem; color: var(--ink-2); margin-top: 1rem; }
 .pull { margin: 0; background: var(--ink); color: #fff; border-radius: 20px; padding: 2.4rem 2rem; position: relative; overflow: hidden; }
 .pull::after { content: ""; position: absolute; inset: auto -40px -60px auto; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, #ff8a3d 0%, transparent 70%); opacity: .5; }
-.pull-mark { font-family: var(--display); font-size: 5rem; line-height: .6; color: var(--ember); display: block; }
+.yaji-fall { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.yaji-fall canvas { width: 100%; height: 100%; display: block; }
+.pull-mark { position: relative; z-index: 1;  font-family: var(--display); font-size: 5rem; line-height: .6; color: var(--ember); display: block; }
 .pull p { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; line-height: 1.2; margin: .6rem 0 1rem; color: #fff !important; position: relative; z-index: 1; }
 .pull cite { font-style: normal; color: #e2b44a; font-weight: 600; font-size: .95rem; position: relative; z-index: 1; }
 .skewers { width: 100%; max-width: 420px; margin-inline: auto; }
@@ -212,4 +214,4 @@ details p { margin: .8rem 0 0; color: var(--ink-2); }
 @media (min-width: 561px) and (max-width: 860px) {
   .menu-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (prefers-reduced-motion: reduce) { .photo-frame, .photo-frame img, .sheen, .ember, .steam i { animation: none !important; } .embers, .steam { display: none; } html { scroll-behavior: auto; } .btn { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .yaji-fall { display: none; } .photo-frame, .photo-frame img, .sheen, .ember, .steam i { animation: none !important; } .embers, .steam { display: none; } html { scroll-behavior: auto; } .btn { transition: none; } }
