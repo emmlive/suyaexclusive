@@ -58,14 +58,3 @@ document.querySelectorAll(".week li").forEach(li => {
     stage.addEventListener("mouseleave", () => { frame.style.setProperty("--rx", "0deg"); frame.style.setProperty("--ry", "0deg"); });
   }
 })();
-
-// Gentle fade-in as sections scroll into view
-(() => {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
-  const items = document.querySelectorAll(".section h2, .section-lede, .steps li, .menu-card, .catering > *, .facts li, .story-copy, .story-photo, .week, .hours, details");
-  document.documentElement.classList.add("js-reveal");
-  const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-  }), { rootMargin: "0px 0px -8% 0px" });
-  items.forEach((el, i) => { el.classList.add("reveal"); el.style.transitionDelay = (i % 4) * 70 + "ms"; io.observe(el); });
-})();
